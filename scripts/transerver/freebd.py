@@ -8,7 +8,7 @@ Description:
 
 Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
 '''
-import Translator 
+from scripts.transerver import Translator 
 import requests
 import json
 

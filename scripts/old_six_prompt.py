@@ -144,8 +144,7 @@ def extract_tags(text):
         rdindex=random.randint(0,len(newarr)-1)
         rdtext=newarr[rdindex]
         text = re.sub(pattern, rdtext, text,count=1)
-    return text
-    
+    return text    
 transObj={
     #  'server':'',
     #  'appid':'',
