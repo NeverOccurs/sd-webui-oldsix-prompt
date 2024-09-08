@@ -119,8 +119,15 @@ def random_prompt(prompts_dict):
 def truncate_text(text, max_length=20):
     return text if len(text) <= max_length else text[:max_length-3] + "..."
 
+def add_to_prompt(prompt_to_add, translation, current_prompt):
+    # Use the translation directly, which should be the English part
+    english_prompt = translation.strip()
+    if current_prompt:
+        return f"{current_prompt}, {english_prompt}"
+    return english_prompt
+
 css = """
-.gr-box {
+.gr-group {
     border: none !important;
     background-color: transparent !important;
     margin-bottom: 1em;
@@ -145,13 +152,11 @@ css = """
 .gr-markdown {
     margin-bottom: 0.5em;
 }
-.prompt-grid-wrapper {
+.prompt-grid {
     display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 0.5em;
-    max-width: 1200px; /* Adjust this value as needed */
     width: 100%;
-    margin: 0 auto;
 }
 """
 
@@ -174,12 +179,21 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", secondary_hue="blue"), c
             with gr.Tab(category):
                 for subcategory, prompts in subcategories.items():
                     gr.Markdown(f"### {subcategory}")
-                    with gr.Row(elem_classes=["prompt-grid-wrapper"]):
+                    with gr.Row(elem_classes=["prompt-grid"]):
                         for prompt, translation in prompts.items():
                             truncated_prompt = truncate_text(prompt)
                             truncated_translation = truncate_text(translation)
-                            gr.Button(f"{truncated_prompt} ({truncated_translation})", size="sm")
-    
+                            button = gr.Button(f"{truncated_prompt} ({truncated_translation})", size="sm")
+                            button.click(
+                                add_to_prompt, 
+                                inputs=[
+                                    gr.Textbox(value=prompt, visible=False),
+                                    gr.Textbox(value=translation, visible=False),
+                                    prompt_input
+                                ], 
+                                outputs=prompt_input
+                            )
+
     with gr.Row():
         search_input = gr.Textbox(label="Search Prompts")
         search_output = gr.Textbox(label="Search Results", lines=5)
