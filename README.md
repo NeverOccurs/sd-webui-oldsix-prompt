@@ -1,4 +1,4 @@
-### 独立脱离webui版
+### Oldsix-Prompt独立脱离webui版
 
 最好建个虚拟环境，python3.10就行，然后安装依赖，主要就是gradio，别的我忘记了，可以直接python standalone_app.py，缺什么包补什么包，没几个新包。
 和原版样式不完全一样，完全用cursor改的，里面很多文件有点乱七八糟，有时间我再稍微看看优化优化。
