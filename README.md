@@ -1,4 +1,13 @@
+### Oldsix-Prompt独立脱离webui版
 
+最好建个虚拟环境，python3.10就行，然后安装依赖，主要就是gradio，别的我忘记了，可以直接python standalone_app.py，缺什么包补什么包，没几个新包。
+默认http://127.0.0.1:7860，有需要的可以自己改。
+standalone_app.py里有代理设置，需要自己改一下。
+和原版样式不完全一样，完全用cursor改的，里面很多文件有点乱七八糟，有时间我再稍微看看优化优化。
+作者几乎零代码基础，稍微会点python，别的啥都不会，希望能帮到有需要的人。
+
+运行截图：
+![image](https://github.com/user-attachments/assets/cb7040c8-c847-4579-aa9e-0b2ba4fd0d77)
 
 # v1.75
 ### 老版词库 @路过银河&网上收集
